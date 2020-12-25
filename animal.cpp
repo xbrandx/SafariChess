@@ -2,7 +2,7 @@
 #include "cell.h"
 #include <QDebug>
 
-QImage Animal::faces[8];
+QImage Animal::faces[16];
 bool Animal::initialized = false;
 extern float scale;
 QPoint Animal::mouseDownOffset; // Distance to add to mouse pos to move
@@ -12,7 +12,8 @@ Qt::MouseButtons Animal::buttonDown;
 Animal::Animal(int v, QWidget *parent)
     :QLabel(parent), value(v)
 {
-    piece = pieces(v % 8);
+    piece = pieces(v%8);
+    color = colors(v/8);
     ShowZoo();
     show();
 }
@@ -29,19 +30,20 @@ void Animal::Initialized()
     if(initialized) return;
     initialized = true;
     char piece[] = {'M','C','D','W','P','T','L','E'}; //P is Cheetah.
-    QString fname =":/animals/M-animal.png";
+    char color[] = {'R','B'};
+    QString fname = ":/animals/XX-animal.png";
 
     int n = 0;
-   // for (int j = 1; j <= 2; j++)
- //   {
-   //     fname[11] = (char)j;
-        for(int i = MOUSE; i <= ELEPHAN; i++)
+    for(int c = RED; c <= BLUE; c++)
+    {
+        fname[10] = color[c];
+        for(int p = MOUSE; p <= ELEPHAN; p++)
         {
-            fname[10] = piece[i];
+            fname[11] = piece[p];
             faces[n] = QImage(fname);
             n++;
         }
-  //  }
+    }
 }
 
 void Animal::Move(Cell *to)
@@ -50,8 +52,8 @@ void Animal::Move(Cell *to)
 
     QPoint topLeft = to->pos();
 
-    x = topLeft.x() + 15;
-    y = topLeft.y() + 15;
+    x = topLeft.x() + 11;
+    y = topLeft.y() + 11;
 
 //    resizeEvent(QResizeEvent*);
 
@@ -64,8 +66,7 @@ void Animal::Move(Cell *to)
 
 void Animal::ShowZoo()
 {
-    setPixmap(QPixmap::fromImage(faces[value % 8]));
-
+    setPixmap(QPixmap::fromImage(faces[value % 16]));
 }
 
 void Animal::mousePressEvent(QMouseEvent *ev)
@@ -78,7 +79,7 @@ void Animal::mousePressEvent(QMouseEvent *ev)
 //        this->raise();   //raise the object on the top.
     } else if (ev->button() == Qt::RightButton)
     {
-        move(pos()+QPoint(0,68));
+        move(pos()+QPoint(0,0));
     }
 }
 
@@ -118,9 +119,6 @@ void Animal::mouseReleaseEvent(QMouseEvent *ev){
         this->AdjustPositions(QPoint(x,y),ev->globalPos());
 */
     }
-
-
-
 /*    else
         if(pile){
             QPoint point =ev->globalPos()+mouseDownOffset;

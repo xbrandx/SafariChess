@@ -50,9 +50,9 @@ void Cell::AddDropRules(int n ...)
 void Cell::FindClosestDrop(Animal *a, QPoint c)
 {
     QPoint drop = a->pos();
-    QPoint d = QPoint(25,25);
-    int x = drop.x()+25;
-    int y = drop.y()+25;
+//    QPoint d = QPoint(25,25);
+    int x = drop.x();
+    int y = drop.y();
 
 //    int x = 25;
 //    int y = 25;
@@ -71,7 +71,7 @@ void Cell::FindClosestDrop(Animal *a, QPoint c)
 /*    const int NUM = 3;
     QPoint drop = a->pos();
     Cell *closest[NUM] = {NULL, NULL, NULL};
-/*    int distance[NUM] = {10000, 20000, 30000};
+    int distance[NUM] = {10000, 20000, 30000};
         for (int i = 0; i<safari->cell.count(); i++)
         {
             Pile *p = safari->cell[i];
@@ -111,7 +111,6 @@ bool Cell::CanBeDropped(Animal *a)
     }
     return ok;
 }
-
 
 
 //Methods for inheriting classes----------------------------------------

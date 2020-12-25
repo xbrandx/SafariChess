@@ -7,22 +7,23 @@
 #include <QMouseEvent>
 
 class Cell;
-enum pieces{MOUSE, CAT, DOG, WOLF, CHEETAH, TIGER, LION, ELEPHAN};
+enum pieces{MOUSE,CAT,DOG,WOLF,CHEETAH,TIGER,LION,ELEPHAN};
+enum colors{RED,BLUE};
 
-class Animal: public QLabel
+class Animal : public QLabel
 {
 public:
-    static QImage faces[8];
+    static QImage faces[16];
     static bool initialized;
     int value;
     int x, y;
     pieces piece;
+    colors color;
     Cell *cell;
     bool moving;
     static QPoint mouseDownOffset; // Distance to add to mouse pos to move
     static QPoint startDragPos;
     static Qt::MouseButtons buttonDown;
-public:
     Animal(int v, QWidget *parent = 0);
 //    void resizeEvent(QResizeEvent *);
     void Move(Cell *);

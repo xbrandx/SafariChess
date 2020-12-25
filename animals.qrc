@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/animals">
+        <file>BC-animal.png</file>
+        <file>BD-animal.png</file>
+        <file>BE-animal.png</file>
+        <file>BL-animal.png</file>
+        <file>BM-animal.png</file>
+        <file>BP-animal.png</file>
+        <file>BT-animal.png</file>
+        <file>BW-animal.png</file>
+        <file>RC-animal.png</file>
+        <file>RD-animal.png</file>
+        <file>RE-animal.png</file>
+        <file>RL-animal.png</file>
+        <file>RM-animal.png</file>
+        <file>RP-animal.png</file>
+        <file>RT-animal.png</file>
+        <file>RW-animal.png</file>
+    </qresource>
+</RCC>
