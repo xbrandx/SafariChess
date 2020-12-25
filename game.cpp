@@ -1,5 +1,3 @@
-#include "animal.h"
-#include "cell.h"
 #include "game.h"
 
 Game::Game(QWidget *par)

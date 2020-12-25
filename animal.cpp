@@ -1,6 +1,4 @@
 #include "animal.h"
-#include "cell.h"
-#include <QDebug>
 
 QImage Animal::faces[16];
 bool Animal::initialized = false;

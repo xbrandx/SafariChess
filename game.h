@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QList>
+#include "animal.h"
+#include "cell.h"
 
 class Cell;
 class Animal;

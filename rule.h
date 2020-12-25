@@ -2,16 +2,20 @@
 #define RULE_H
 
 #include <QWidget>
+#include "cell.h"
+#include "animal.h"
 
 class Animal;
 class Cell;
+
 class Rule  //abstract base class
 {
 public:
     virtual bool Enforce(Cell *c, Animal *a)=0;
 };
 
-class RuleRiver:public Rule{
+class RuleRiver : public Rule
+{
     bool Enforce(Cell *c, Animal *a);
 };
 

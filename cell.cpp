@@ -1,8 +1,4 @@
-#include <QPainter>
 #include "cell.h"
-#include "animal.h"
-#include "gameboard.h"
-#include "game.h"
 
 extern float scale;
 extern Game *game;

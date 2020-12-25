@@ -2,6 +2,11 @@
 #define GAMEBOARD_H
 
 #include <QMainWindow>
+#include "animal.h"
+#include "cell.h"
+//#include "safari.h"
+#include "game.h"
+#include "ui_gameboard.h"
 
 class Game;
 

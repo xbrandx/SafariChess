@@ -1,9 +1,5 @@
-#include "animal.h"
-#include "cell.h"
-#include "safari.h"
-#include "game.h"
 #include "gameboard.h"
-#include "ui_gameboard.h"
+#include "safari.h"
 
 Game *game;
 float scale = 1.0;

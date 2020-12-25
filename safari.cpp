@@ -1,5 +1,3 @@
-#include "animal.h"
-#include "cell.h"
 #include "safari.h"
 
 Safari::Safari(QWidget *par)

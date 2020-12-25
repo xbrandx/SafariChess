@@ -5,8 +5,11 @@
 #include <QLabel>
 #include <QImage>
 #include <QMouseEvent>
+#include <QDebug>
+#include "cell.h"
 
 class Cell;
+class Rule;
 enum pieces{MOUSE,CAT,DOG,WOLF,CHEETAH,TIGER,LION,ELEPHAN};
 enum colors{RED,BLUE};
 

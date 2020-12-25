@@ -3,10 +3,14 @@
 
 #include <QLabel>
 #include <QMouseEvent>
+#include <QPainter>
 #include "rule.h"
 #include "game.h"
+#include "animal.h"
+#include "gameboard.h"
 
 class Animal;
+class Rule;
 
 const int DROPLAST = 6;
 enum cellType{GRASS, RIVER, TRAP, BASE};
