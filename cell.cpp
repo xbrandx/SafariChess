@@ -10,6 +10,7 @@ Cell::Cell(int x, int y, QWidget *parent)
     :QLabel(parent), X(x), Y(y)
 {
     setStyleSheet("border:2.5px solid rgb(255, 255, 255);");
+    game->AddCell(this);
     move(x, y);
     resize(70, 70);
 //    setFrameShape(Box);
@@ -28,7 +29,61 @@ void Cell::paintEvent(QPaintEvent *)
 */
 void Cell::AcceptAnimal(Animal *a)
 {
-    zoo = a;
+    qDebug() << "Accept Me!";
+
+    a->cell = this;
+    a->AdjustPositions(pos()+QPoint(11,11),QPoint(0,10));
+
+    qDebug() << this->pos();
+}
+
+void Cell::ReleaseAnimal(Animal *a)
+{
+
+}
+
+bool Cell::CanBeDropped(Animal *a)
+{
+    int i = 0;
+    bool ok=true;
+    while(ok&&DropRule(i)){
+        ok=DropRule(i++)->Enforce(this, a);
+    }
+    return ok;
+}
+
+void Cell::FindClosestDrop(Animal *a)
+{
+    const int NUM = 3;
+    QPoint drop = a->pos();
+    Cell *closest[NUM] = {NULL, NULL, NULL};
+    int distance[NUM] = {10000, 20000, 30000};
+    for (int i = 0; i<game->cells.count(); i++)
+    {
+        Cell *c = game->cells[i];
+        if (c == a->cell)
+            continue;
+        QPoint diff = drop - c->pos();
+        int dist = diff.manhattanLength();
+        for (int j = 0; j < NUM; j++)
+        {
+            if (dist < distance[j])
+            {
+                std::swap(dist, distance[j]);
+                std::swap(c, closest[j]);
+            }
+        }
+    }
+    for (int i = 0; i < NUM; i++)
+    {
+        if (closest[i] && closest[i]->CanBeDropped(a))
+        {
+            closest[i]->AcceptAnimal(a);
+            return;
+        }
+    }
+//    QPoint p = a->under?(c->under->pos()+c->pile->Delta()/(c->under->faceup?1:2)):c->pile->pos();
+//    a->AdjustPositions(p, a->cell->delta); // put them back if no move
 }
 
 void Cell::AddDropRules(int n ...)
@@ -41,71 +96,6 @@ void Cell::AddDropRules(int n ...)
         DropRule(i++,va_arg(lp,Rule*));
     DropRule(i,NULL);
     va_end(lp);
-}
-
-void Cell::FindClosestDrop(Animal *a, QPoint c)
-{
-    QPoint drop = a->pos();
-//    QPoint d = QPoint(25,25);
-    int x = drop.x();
-    int y = drop.y();
-
-//    int x = 25;
-//    int y = 25;
-
-    a->AdjustPositions(QPoint(x,y),c);
-
-/*    for (int i = 0; i<game->cells.count(); i++)
-    {
-        b = game->cells[i];
-    }
-*/
-//    a->Move(b);
-/*    int i = game->cells.count();
-*/
-
-/*    const int NUM = 3;
-    QPoint drop = a->pos();
-    Cell *closest[NUM] = {NULL, NULL, NULL};
-    int distance[NUM] = {10000, 20000, 30000};
-        for (int i = 0; i<safari->cell.count(); i++)
-        {
-            Pile *p = safari->cell[i];
-            if (p == c->pile)
-                continue;
-            QPoint diff = drop - (p->top?p->top->pos():p->pos());
-            int dist = diff.manhattanLength();
-            for (int j = 0; j < NUM; j++)
-            {
-                if (dist < distance[j])
-                {
-                    std::swap(dist, distance[j]);
-                    std::swap(p, closest[j]);
-                }
-            }
-        }
-        for (int i = 0; i < NUM; i++)
-        {
-            if (closest[i] && closest[i]->CanBeDropped(c))
-            {
-                closest[i]->AcceptCards(c);
-                return;
-            }
-        }
-        QPoint p = c->under?(c->under->pos()+c->pile->Delta()/(c->under->faceup?1:2)):c->pile->pos();
-        c->AdjustPositions(p, c->pile->delta); // put them back if no move
-*/
-    return;
-}
-
-bool Cell::CanBeDropped(Animal *a)
-{
-    int i = 0;
-    bool ok=true;
-    while(ok&&DropRule(i)){
-        ok=DropRule(i++)->Enforce(this, a);
-    }
-    return ok;
 }
 
 

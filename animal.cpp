@@ -70,6 +70,7 @@ void Animal::ShowZoo()
 void Animal::mousePressEvent(QMouseEvent *ev)
 {
     qDebug() << "mouse pressed";
+
     if (ev->button() == Qt::LeftButton)
     {
         startDragPos=pos();
@@ -101,31 +102,10 @@ void Animal::mouseReleaseEvent(QMouseEvent *ev){
     qDebug() << "mouse released";
 
     if(ev->buttons()) return;
-/*    if(popUpCard){
-        popUpCard->move(popUpPos);//restore card position
-        popUpCard=NULL;
-        return;
-    }*/
-    if(moving /*&& cell*/)
+    if(moving)
     {
-        cell->FindClosestDrop(this, ev->globalPos());
-    /*    QPoint drop = this->pos();
-        QPoint d = QPoint(25,25);
-        int x = drop.x()+25;
-        int y = drop.y()+25;
-
-        this->AdjustPositions(QPoint(x,y),ev->globalPos());
-*/
+        cell->FindClosestDrop(this);
     }
-/*    else
-        if(pile){
-            QPoint point =ev->globalPos()+mouseDownOffset;
-            QPoint moved =point-pos();
-            if(moved.manhattanLength()<=4)
-                pile->onClickEvent(this);
-        }
-    moving=false;
-    okToDrag=false;*/
 }
 
 Animal *Animal::AdjustPositions(QPoint newPos, QPoint delta)

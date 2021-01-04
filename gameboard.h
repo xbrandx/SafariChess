@@ -4,10 +4,11 @@
 #include <QMainWindow>
 #include "animal.h"
 #include "cell.h"
-//#include "safari.h"
 #include "game.h"
+//#include "safari.h"
 #include "ui_gameboard.h"
 
+//class Safari;
 class Game;
 
 namespace Ui {

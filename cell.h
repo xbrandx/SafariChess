@@ -23,23 +23,20 @@ private:
     static Rule *dropRules[DROPLAST];
 public:
     explicit Cell(int x, int y, QWidget *parent);
-    void AcceptAnimal(Animal *a);
 //    void paintEvent(QPaintEvent *);
-
-    void AddDropRules(int n...);
-
-    Rule *DropRule(int i){return dropRules[i];}
-    void DropRule(int i, Rule *r){dropRules[i] = r;}
-
-    void FindClosestDrop(Animal* a, QPoint c);
-    bool CanBeDropped(Animal *a);
-
 //    int getX() const {return X;}
 //    int getY() const {return Y;}
-
-
+    void AcceptAnimal(Animal *a);
+    void ReleaseAnimal(Animal *a);
+    bool CanBeDropped(Animal *a);
+    void FindClosestDrop(Animal* a);
+    void AddDropRules(int n...);
+    Rule *DropRule(int i){return dropRules[i];}
+    void DropRule(int i, Rule *r){dropRules[i] = r;}
 };
 
+
+//Methods for inheriting classes----------------------------------------
 class CellGrass : public Cell
 {
 public:

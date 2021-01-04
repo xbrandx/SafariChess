@@ -10,7 +10,6 @@ class Cell;
 
 class Safari : public Game
 {
-//private:
 public:
     Cell *grass[43];
     Cell *river[12];
