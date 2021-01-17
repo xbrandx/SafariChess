@@ -63,6 +63,8 @@ void Safari::Load()
         grass[n++] = new CellGrass(340+68*i, 544, parent);
     }
 
+    grass[0]->AddDropRules(1, new RuleGeneral());
+
     int m = 0;
     for (int j = 0; j < 3; j++)
     {
@@ -89,9 +91,13 @@ void Safari::Load()
     trap[o++] = new CellTrap(136, 544, parent);
     trap[o++] = new CellTrap(272, 544, parent);
 
+    trap[0]->AddDropRules(1, new RuleGeneral());
+
     int b = 0;
     base[b++] = new CellBase(204, 0, parent);
     base[b++] = new CellBase(204, 544, parent);
+
+    base[0]->AddDropRules(1, new RuleGeneral());
 
     Zoo[0]->Move(grass[10]);
     Zoo[1]->Move(grass[8]);

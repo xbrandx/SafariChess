@@ -4,7 +4,10 @@ extern float scale;
 extern Game *game;
 extern QList<Cell *> cells;
 
-Rule *Cell::dropRules[DROPLAST];
+Rule *CellGrass::dropRules[DROPLAST];
+Rule *CellRiver::dropRules[DROPLAST];
+Rule *CellTrap::dropRules[DROPLAST];
+Rule *CellBase::dropRules[DROPLAST];
 
 Cell::Cell(int x, int y, QWidget *parent)
     :QLabel(parent), X(x), Y(y)
@@ -29,12 +32,8 @@ void Cell::paintEvent(QPaintEvent *)
 */
 void Cell::AcceptAnimal(Animal *a)
 {
-    qDebug() << "Accept Me!";
-
     a->cell = this;
     a->AdjustPositions(pos()+QPoint(11,11),QPoint(0,10));
-
-    qDebug() << this->pos();
 }
 
 void Cell::ReleaseAnimal(Animal *a)
@@ -92,7 +91,6 @@ void Cell::AddDropRules(int n ...)
     va_start(lp,n);
     int i = 0;
     while(i<n)
-        i++;
         DropRule(i++,va_arg(lp,Rule*));
     DropRule(i,NULL);
     va_end(lp);
@@ -107,11 +105,21 @@ CellGrass::CellGrass(int x, int y, QWidget *parent)
                   "border:2.5px solid rgb(255, 255, 255);");
 }
 
+cellType CellGrass::Type()
+{
+    return GRASS;
+}
+
 CellRiver::CellRiver(int x, int y, QWidget *parent)
     :Cell(x,y,parent)
 {
     setStyleSheet("background-color: rgb(0, 170, 255);"
                   "border:2.5px solid rgb(255, 255, 255);");
+}
+
+cellType CellRiver::Type()
+{
+    return RIVER;
 }
 
 CellTrap::CellTrap(int x, int y, QWidget *parent)
@@ -121,9 +129,19 @@ CellTrap::CellTrap(int x, int y, QWidget *parent)
                   "border:2.5px solid rgb(255, 255, 255);");
 }
 
+cellType CellTrap::Type()
+{
+    return TRAP;
+}
+
 CellBase::CellBase(int x, int y, QWidget *parent)
     :Cell(x,y,parent)
 {
     setStyleSheet("background-color: red;"
                   "border:2.5px solid rgb(255, 255, 255);");
+}
+
+cellType CellBase::Type()
+{
+    return BASE;
 }

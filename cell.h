@@ -20,7 +20,6 @@ class Cell : public QLabel
 private:
     Animal *zoo;
     int X, Y;
-    static Rule *dropRules[DROPLAST];
 public:
     explicit Cell(int x, int y, QWidget *parent);
 //    void paintEvent(QPaintEvent *);
@@ -31,34 +30,55 @@ public:
     bool CanBeDropped(Animal *a);
     void FindClosestDrop(Animal* a);
     void AddDropRules(int n...);
-    Rule *DropRule(int i){return dropRules[i];}
-    void DropRule(int i, Rule *r){dropRules[i] = r;}
+
+    virtual Rule * DropRule(int i)=0;
+    virtual void DropRule(int i, Rule *r)=0;
 };
 
 
 //Methods for inheriting classes----------------------------------------
 class CellGrass : public Cell
 {
+private:
+    static Rule *dropRules[DROPLAST];
 public:
     CellGrass(int x, int y, QWidget *parent);
+    Rule *DropRule(int i){return dropRules[i];}
+    void DropRule(int i, Rule *r){dropRules[i] = r;}
+    cellType Type();
 };
 
 class CellRiver : public Cell
 {
+private:
+    static Rule *dropRules[DROPLAST];
 public:
     CellRiver(int x, int y, QWidget *parent);
+    Rule *DropRule(int i){return dropRules[i];}
+    void DropRule(int i, Rule *r){dropRules[i] = r;}
+    cellType Type();
 };
 
 class CellTrap : public Cell
 {
+private:
+    static Rule *dropRules[DROPLAST];
 public:
     CellTrap(int x, int y, QWidget *parent);
+    Rule *DropRule(int i){return dropRules[i];}
+    void DropRule(int i, Rule *r){dropRules[i] = r;}
+    cellType Type();
 };
 
 class CellBase : public Cell
 {
+private:
+    static Rule *dropRules[DROPLAST];
 public:
     CellBase(int x, int y, QWidget *parent);
+    Rule *DropRule(int i){return dropRules[i];}
+    void DropRule(int i, Rule *r){dropRules[i] = r;}
+    cellType Type();
 };
 
 #endif // CELL_H

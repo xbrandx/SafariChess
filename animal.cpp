@@ -46,8 +46,6 @@ void Animal::Initialized()
 
 void Animal::Move(Cell *to)
 {
-//    ShowZoo();
-
     QPoint topLeft = to->pos();
 
     x = topLeft.x() + 11;
@@ -69,13 +67,10 @@ void Animal::ShowZoo()
 
 void Animal::mousePressEvent(QMouseEvent *ev)
 {
-    qDebug() << "mouse pressed";
-
     if (ev->button() == Qt::LeftButton)
     {
         startDragPos=pos();
         mouseDownOffset=pos()-ev->globalPos();
-//        this->raise();   //raise the object on the top.
     } else if (ev->button() == Qt::RightButton)
     {
         move(pos()+QPoint(0,0));
@@ -84,13 +79,10 @@ void Animal::mousePressEvent(QMouseEvent *ev)
 
 void Animal::mouseMoveEvent(QMouseEvent *ev)
 {
-    qDebug() << "mouse moved";
-
     QPoint point =ev->globalPos()+mouseDownOffset;
     QPoint moved = point-pos();
 
     if(moving)
-    //    move(pos()-QPoint(0,68));
         AdjustPositions(point,QPoint(0,10));
     else
         if(moved.manhattanLength()>4)
@@ -99,8 +91,6 @@ void Animal::mouseMoveEvent(QMouseEvent *ev)
 }
 
 void Animal::mouseReleaseEvent(QMouseEvent *ev){
-    qDebug() << "mouse released";
-
     if(ev->buttons()) return;
     if(moving)
     {
