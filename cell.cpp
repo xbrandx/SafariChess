@@ -43,9 +43,11 @@ void Cell::ReleaseAnimal(Animal *a)
 
 bool Cell::CanBeDropped(Animal *a)
 {
+    qDebug() << "can be dropped function";
     int i = 0;
     bool ok=true;
     while(ok&&DropRule(i)){
+        qDebug() << "while loop";
         ok=DropRule(i++)->Enforce(this, a);
     }
     return ok;
@@ -73,16 +75,19 @@ void Cell::FindClosestDrop(Animal *a)
             }
         }
     }
-    for (int i = 0; i < NUM; i++)
+    for (int i = 0; i < NUM - 2; i++)
     {
+        qDebug() << "for loop";
+        qDebug() << i;
         if (closest[i] && closest[i]->CanBeDropped(a))
         {
+            qDebug() << "closest loop";
             closest[i]->AcceptAnimal(a);
             return;
         }
     }
-//    QPoint p = a->under?(c->under->pos()+c->pile->Delta()/(c->under->faceup?1:2)):c->pile->pos();
-//    a->AdjustPositions(p, a->cell->delta); // put them back if no move
+    QPoint p = a->cell->pos() + QPoint(11,11);
+    a->AdjustPositions(p, QPoint(0,10)); // put them back if no move
 }
 
 void Cell::AddDropRules(int n ...)

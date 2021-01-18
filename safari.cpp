@@ -73,6 +73,7 @@ void Safari::Load()
             river[m++] = new CellRiver(68+68*i, 204+68*j, parent);
         }
     }
+
     for (int j = 0; j < 3; j++)
     {
         for (int i = 0; i < 2; i++)
