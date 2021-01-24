@@ -14,7 +14,8 @@ public:
     Cell *grass[43];
     Cell *river[12];
     Cell *trap[6];
-    Cell *base[2];
+    Cell *red_base;
+    Cell *blue_base;
 public:
     Safari(QWidget *par);
     void Load();

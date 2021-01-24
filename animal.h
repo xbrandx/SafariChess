@@ -35,6 +35,7 @@ public:
     void Move(Cell *);
     void ShowZoo();
     pieces Pieces(){return piece;}
+    colors Colors(){return color;}
     void mousePressEvent(QMouseEvent *ev);
     void mouseMoveEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);

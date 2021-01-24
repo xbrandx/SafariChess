@@ -7,7 +7,8 @@ extern QList<Cell *> cells;
 Rule *CellGrass::dropRules[DROPLAST];
 Rule *CellRiver::dropRules[DROPLAST];
 Rule *CellTrap::dropRules[DROPLAST];
-Rule *CellBase::dropRules[DROPLAST];
+Rule *CellRedBase::dropRules[DROPLAST];
+Rule *CellBlueBase::dropRules[DROPLAST];
 
 Cell::Cell(int x, int y, QWidget *parent)
     :QLabel(parent), X(x), Y(y)
@@ -34,6 +35,22 @@ void Cell::AcceptAnimal(Animal *a)
 {
     a->cell = this;
     a->AdjustPositions(pos()+QPoint(11,11),QPoint(0,10));
+
+    if (Type() == RED_BASE && a->Colors() == BLUE)
+    {
+        qDebug() << "Blue wins!";
+        QMessageBox msgBox;
+        msgBox.setText("Blue wins!");
+        msgBox.exec();
+    }
+
+    if (Type() == BLUE_BASE && a->Colors() == RED)
+    {
+        qDebug() << "Red wins!";
+        QMessageBox msgBox;
+        msgBox.setText("Red wins!");
+        msgBox.exec();
+    }
 }
 
 void Cell::ReleaseAnimal(Animal *a)
@@ -139,14 +156,26 @@ cellType CellTrap::Type()
     return TRAP;
 }
 
-CellBase::CellBase(int x, int y, QWidget *parent)
+CellRedBase::CellRedBase(int x, int y, QWidget *parent)
     :Cell(x,y,parent)
 {
     setStyleSheet("background-color: red;"
                   "border:2.5px solid rgb(255, 255, 255);");
 }
 
-cellType CellBase::Type()
+cellType CellRedBase::Type()
 {
-    return BASE;
+    return RED_BASE;
+}
+
+CellBlueBase::CellBlueBase(int x, int y, QWidget *parent)
+    :Cell(x,y,parent)
+{
+    setStyleSheet("background-color: red;"
+                  "border:2.5px solid rgb(255, 255, 255);");
+}
+
+cellType CellBlueBase::Type()
+{
+    return BLUE_BASE;
 }

@@ -94,11 +94,13 @@ void Safari::Load()
 
     trap[0]->AddDropRules(1, new RuleGeneral());
 
-    int b = 0;
-    base[b++] = new CellBase(204, 0, parent);
-    base[b++] = new CellBase(204, 544, parent);
+    red_base = new CellRedBase(204, 0, parent);
 
-    base[0]->AddDropRules(1, new RuleGeneral());
+    red_base->AddDropRules(1, new RuleRedBase());
+
+    blue_base = new CellBlueBase(204, 544, parent);
+
+    blue_base->AddDropRules(1, new RuleBlueBase());
 
     Zoo[0]->Move(grass[10]);
     Zoo[1]->Move(grass[8]);

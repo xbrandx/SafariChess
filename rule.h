@@ -25,4 +25,14 @@ class RuleRiver : public Rule
     bool Enforce(Cell *c, Animal *a);
 };
 
+class RuleBlueBase : public Rule
+{
+    bool Enforce(Cell *c, Animal *a);
+};
+
+class RuleRedBase : public Rule
+{
+    bool Enforce(Cell *c, Animal *a);
+};
+
 #endif // RULE_H
