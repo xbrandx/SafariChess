@@ -28,6 +28,7 @@ public:
 //    int getY() const {return Y;}
     void AcceptAnimal(Animal *a);
     void ReleaseAnimal(Animal *a);
+    bool Empty(){return !zoo;}
     bool CanBeDropped(Animal *a);
     void FindClosestDrop(Animal* a);
     void AddDropRules(int n...);

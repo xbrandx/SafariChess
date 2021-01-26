@@ -11,7 +11,7 @@ Rule *CellRedBase::dropRules[DROPLAST];
 Rule *CellBlueBase::dropRules[DROPLAST];
 
 Cell::Cell(int x, int y, QWidget *parent)
-    :QLabel(parent), X(x), Y(y)
+    :QLabel(parent), zoo(0), X(x), Y(y)
 {
     setStyleSheet("border:2.5px solid rgb(255, 255, 255);");
     game->AddCell(this);
@@ -33,12 +33,19 @@ void Cell::paintEvent(QPaintEvent *)
 */
 void Cell::AcceptAnimal(Animal *a)
 {
+    if (a == NULL) return;
+    if (a->cell)
+    {
+        a->cell->ReleaseAnimal(a);
+    }
+
+    zoo = a;
+
     a->cell = this;
     a->AdjustPositions(pos()+QPoint(11,11),QPoint(0,10));
 
     if (Type() == RED_BASE && a->Colors() == BLUE)
     {
-        qDebug() << "Blue wins!";
         QMessageBox msgBox;
         msgBox.setText("Blue wins!");
         msgBox.exec();
@@ -46,7 +53,6 @@ void Cell::AcceptAnimal(Animal *a)
 
     if (Type() == BLUE_BASE && a->Colors() == RED)
     {
-        qDebug() << "Red wins!";
         QMessageBox msgBox;
         msgBox.setText("Red wins!");
         msgBox.exec();
@@ -55,16 +61,14 @@ void Cell::AcceptAnimal(Animal *a)
 
 void Cell::ReleaseAnimal(Animal *a)
 {
-
+    a->cell->zoo = NULL;
 }
 
 bool Cell::CanBeDropped(Animal *a)
 {
-    qDebug() << "can be dropped function";
     int i = 0;
     bool ok=true;
     while(ok&&DropRule(i)){
-        qDebug() << "while loop";
         ok=DropRule(i++)->Enforce(this, a);
     }
     return ok;
@@ -94,11 +98,8 @@ void Cell::FindClosestDrop(Animal *a)
     }
     for (int i = 0; i < NUM - 2; i++)
     {
-        qDebug() << "for loop";
-        qDebug() << i;
         if (closest[i] && closest[i]->CanBeDropped(a))
         {
-            qDebug() << "closest loop";
             closest[i]->AcceptAnimal(a);
             return;
         }

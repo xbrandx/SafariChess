@@ -8,7 +8,7 @@ QPoint Animal::startDragPos;
 Qt::MouseButtons Animal::buttonDown;
 
 Animal::Animal(int v, QWidget *parent)
-    :QLabel(parent), value(v)
+    :QLabel(parent), value(v), cell(0)
 {
     piece = pieces(v%8);
     color = colors(v/8);
