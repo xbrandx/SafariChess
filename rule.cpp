@@ -7,15 +7,15 @@ bool RuleGeneral::Enforce(Cell *c, Animal *a)
 
 bool RuleRiver::Enforce(Cell *c, Animal *a)
 {
-    return a->Pieces()==MOUSE;
+    return c->Empty() && a->Pieces()==MOUSE;
 }
 
 bool RuleBlueBase::Enforce(Cell *c, Animal *a)
 {
-    return a->Colors()==RED;
+    return c->Empty() && a->Colors()==RED;
 }
 
 bool RuleRedBase::Enforce(Cell *c, Animal *a)
 {
-    return a->Colors()==BLUE;
+    return c->Empty() && a->Colors()==BLUE;
 }
