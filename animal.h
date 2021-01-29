@@ -40,6 +40,7 @@ public:
     void mouseMoveEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
     Animal *AdjustPositions(QPoint newPos, QPoint delta);
+    void Clear();
 };
 
 #endif // ANIMAL_H

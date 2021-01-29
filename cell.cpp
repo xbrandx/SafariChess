@@ -35,6 +35,10 @@ void Cell::paintEvent(QPaintEvent *)
 void Cell::AcceptAnimal(Animal *a)
 {
     if (a == NULL) return;
+    if (zoo)
+    {
+        zoo->Clear();
+    }
     if (a->cell)
     {
         a->cell->ReleaseAnimal(a);

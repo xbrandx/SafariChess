@@ -112,3 +112,8 @@ Animal *Animal::AdjustPositions(QPoint newPos, QPoint delta)
     }while(!a);
     return top;
 }
+
+void Animal::Clear()
+{
+    delete this;
+}
