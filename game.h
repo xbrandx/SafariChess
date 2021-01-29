@@ -15,7 +15,7 @@ protected:
     QWidget *parent;
 public:
     QList<Cell *> cells;
-public:
+
     Game(QWidget *par);
     virtual ~Game();
     void AddCell(Cell* c);

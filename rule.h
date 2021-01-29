@@ -15,7 +15,7 @@ public:
     virtual bool Enforce(Cell *c, Animal *a)=0;
 };
 
-class RuleGeneral : public Rule
+class RuleGrass : public Rule
 {
     bool Enforce(Cell *c, Animal *a);
 };
@@ -25,12 +25,22 @@ class RuleRiver : public Rule
     bool Enforce(Cell *c, Animal *a);
 };
 
-class RuleBlueBase : public Rule
+class RuleRedTrap : public Rule
+{
+    bool Enforce(Cell *c, Animal *a);
+};
+
+class RuleBlueTrap : public Rule
 {
     bool Enforce(Cell *c, Animal *a);
 };
 
 class RuleRedBase : public Rule
+{
+    bool Enforce(Cell *c, Animal *a);
+};
+
+class RuleBlueBase : public Rule
 {
     bool Enforce(Cell *c, Animal *a);
 };

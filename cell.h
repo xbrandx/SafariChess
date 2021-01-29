@@ -14,7 +14,7 @@ class Animal;
 class Rule;
 
 const int DROPLAST = 6;
-enum cellType{GRASS, RIVER, TRAP, RED_BASE, BLUE_BASE};
+enum cellType{GRASS, RIVER, RED_TRAP, BLUE_TRAP, RED_BASE, BLUE_BASE};
 
 class Cell : public QLabel
 {
@@ -26,13 +26,13 @@ public:
 //    void paintEvent(QPaintEvent *);
 //    int getX() const {return X;}
 //    int getY() const {return Y;}
+    Animal *Zoo(){return zoo;}
+    bool Empty(){return !zoo;}
     void AcceptAnimal(Animal *a);
     void ReleaseAnimal(Animal *a);
-    bool Empty(){return !zoo;}
     bool CanBeDropped(Animal *a);
     void FindClosestDrop(Animal* a);
     void AddDropRules(int n...);
-
     virtual Rule * DropRule(int i)=0;
     virtual void DropRule(int i, Rule *r)=0;
     virtual cellType Type()=0;
@@ -62,12 +62,23 @@ public:
     cellType Type();
 };
 
-class CellTrap : public Cell
+class CellRedTrap : public Cell
 {
 private:
     static Rule *dropRules[DROPLAST];
 public:
-    CellTrap(int x, int y, QWidget *parent);
+    CellRedTrap(int x, int y, QWidget *parent);
+    Rule *DropRule(int i){return dropRules[i];}
+    void DropRule(int i, Rule *r){dropRules[i] = r;}
+    cellType Type();
+};
+
+class CellBlueTrap : public Cell
+{
+private:
+    static Rule *dropRules[DROPLAST];
+public:
+    CellBlueTrap(int x, int y, QWidget *parent);
     Rule *DropRule(int i){return dropRules[i];}
     void DropRule(int i, Rule *r){dropRules[i] = r;}
     cellType Type();

@@ -63,7 +63,7 @@ void Safari::Load()
         grass[n++] = new CellGrass(340+68*i, 544, parent);
     }
 
-    grass[0]->AddDropRules(1, new RuleGeneral());
+    grass[0]->AddDropRules(1, new RuleGrass());
 
     int m = 0;
     for (int j = 0; j < 3; j++)
@@ -85,14 +85,19 @@ void Safari::Load()
     river[0]->AddDropRules(1, new RuleRiver());
 
     int o = 0;
-    trap[o++] = new CellTrap(136, 0, parent);
-    trap[o++] = new CellTrap(272, 0, parent);
-    trap[o++] = new CellTrap(204, 68, parent);
-    trap[o++] = new CellTrap(204, 476, parent);
-    trap[o++] = new CellTrap(136, 544, parent);
-    trap[o++] = new CellTrap(272, 544, parent);
+    red_trap[o++] = new CellRedTrap(136, 0, parent);
+    red_trap[o++] = new CellRedTrap(272, 0, parent);
+    red_trap[o++] = new CellRedTrap(204, 68, parent);
 
-    trap[0]->AddDropRules(1, new RuleGeneral());
+    red_trap[0]->AddDropRules(1, new RuleRedTrap());
+
+    int p = 0;
+
+    blue_trap[p++] = new CellBlueTrap(204, 476, parent);
+    blue_trap[p++] = new CellBlueTrap(136, 544, parent);
+    blue_trap[p++] = new CellBlueTrap(272, 544, parent);
+
+    blue_trap[0]->AddDropRules(1, new RuleBlueTrap());
 
     red_base = new CellRedBase(204, 0, parent);
 

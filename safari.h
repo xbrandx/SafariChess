@@ -13,10 +13,11 @@ class Safari : public Game
 public:
     Cell *grass[43];
     Cell *river[12];
-    Cell *trap[6];
+    Cell *red_trap[3];
+    Cell *blue_trap[3];
     Cell *red_base;
     Cell *blue_base;
-public:
+
     Safari(QWidget *par);
     void Load();
 };

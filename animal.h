@@ -31,11 +31,11 @@ public:
 
     Animal(int v, QWidget *parent = 0);
 //    void resizeEvent(QResizeEvent *);
+    pieces Pieces(){return piece;}
+    colors Colors(){return color;}
     static void Initialized();
     void Move(Cell *);
     void ShowZoo();
-    pieces Pieces(){return piece;}
-    colors Colors(){return color;}
     void mousePressEvent(QMouseEvent *ev);
     void mouseMoveEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
