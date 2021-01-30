@@ -33,6 +33,7 @@ public:
 //    void resizeEvent(QResizeEvent *);
     pieces Pieces(){return piece;}
     colors Colors(){return color;}
+    Cell *Cells(){return cell;}
     static void Initialized();
     void Move(Cell *);
     void ShowZoo();

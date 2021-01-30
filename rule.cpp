@@ -2,12 +2,51 @@
 
 bool RuleGrass::Enforce(Cell *c, Animal *a)
 {
-    return c->Empty() || (a->Pieces() >= c->Zoo()->Pieces() && a->Colors() != c->Zoo()->Colors());
+    bool ok = true;
+    if (c->Empty())
+    {
+        ok = true;
+    } else if (a->Cells()->Type()==RIVER)
+    {
+        ok = false;
+    } else if (a->Pieces()==MOUSE
+               && c->Zoo()->Pieces()==ELEPHAN
+               && a->Colors() != c->Zoo()->Colors())
+    {
+        ok = true;
+    } else if (a->Pieces()==ELEPHAN
+               && c->Zoo()->Pieces()==MOUSE
+               && a->Colors() != c->Zoo()->Colors())
+    {
+        ok = false;
+    } else if (a->Pieces() >= c->Zoo()->Pieces()
+               && a->Colors() != c->Zoo()->Colors())
+    {
+        ok = true;
+    } else
+    {
+        ok = false;
+    }
+    return ok;
 }
 
 bool RuleRiver::Enforce(Cell *c, Animal *a)
 {
-    return (c->Empty() || a->Pieces() == c->Zoo()->Pieces()) && a->Pieces()==MOUSE;
+    bool ok = true;
+    if (a->Cells()->Type()==GRASS
+            && c->Empty()
+            && a->Pieces()==MOUSE)
+    {
+        ok = true;
+    } else if (a->Cells()->Type()==GRASS
+               && !c->Empty()
+               && a->Pieces()==MOUSE)
+    {
+        ok = false;
+    }
+    return (c->Empty() || a->Pieces() == c->Zoo()->Pieces())
+            && a->Pieces()==MOUSE
+            && ok;
 }
 
 bool RuleRedTrap::Enforce(Cell *c, Animal *a)
