@@ -15,6 +15,7 @@ protected:
     QWidget *parent;
 public:
     QList<Cell *> cells;
+    int counter = 0;
 
     Game(QWidget *par);
     virtual ~Game();

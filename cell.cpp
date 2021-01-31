@@ -46,6 +46,7 @@ void Cell::AcceptAnimal(Animal *a)
     zoo = a;
     a->cell = this;
     a->AdjustPositions(pos()+QPoint(11,11),QPoint(0,10));
+    game->counter += 1;
     if (Type() == RED_BASE && a->Colors() == BLUE)
     {
         QMessageBox msgBox;

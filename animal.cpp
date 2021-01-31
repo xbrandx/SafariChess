@@ -6,6 +6,7 @@ extern float scale;
 QPoint Animal::mouseDownOffset; // Distance to add to mouse pos to move
 QPoint Animal::startDragPos;
 Qt::MouseButtons Animal::buttonDown;
+extern Game *game;
 
 Animal::Animal(int v, QWidget *parent)
     :QLabel(parent), value(v), cell(0)
@@ -67,6 +68,8 @@ void Animal::ShowZoo()
 
 void Animal::mousePressEvent(QMouseEvent *ev)
 {
+    if (game->counter % 2 == 0 && this->color == RED) return;
+    if (game->counter % 2 != 0 && this->color == BLUE) return;
     if (ev->button() == Qt::LeftButton)
     {
         startDragPos=pos();
@@ -79,6 +82,8 @@ void Animal::mousePressEvent(QMouseEvent *ev)
 
 void Animal::mouseMoveEvent(QMouseEvent *ev)
 {
+    if (game->counter % 2 == 0 && this->color == RED) return;
+    if (game->counter % 2 != 0 && this->color == BLUE) return;
     QPoint point =ev->globalPos()+mouseDownOffset;
     QPoint moved = point-pos();
 
@@ -86,11 +91,14 @@ void Animal::mouseMoveEvent(QMouseEvent *ev)
         AdjustPositions(point,QPoint(0,10));
     else
         if(moved.manhattanLength()>4)
-            // the mouse has moved more than 4 pixel since the oldposition
+            // the mouse has moved more than 4 pixel since the old position
             moving=true;
 }
 
-void Animal::mouseReleaseEvent(QMouseEvent *ev){
+void Animal::mouseReleaseEvent(QMouseEvent *ev)
+{
+    if (game->counter % 2 == 0 && this->color == RED) return;
+    if (game->counter % 2 != 0 && this->color == BLUE) return;
     if(ev->buttons()) return;
     if(moving)
     {

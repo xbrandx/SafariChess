@@ -6,6 +6,7 @@
 #include <QImage>
 #include <QMouseEvent>
 #include <QDebug>
+#include "game.h"
 #include "cell.h"
 
 class Cell;
