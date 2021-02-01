@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QDebug>
+#include <QPoint>
+#include <cmath>
 #include "cell.h"
 #include "animal.h"
 

@@ -3,6 +3,17 @@
 bool RuleGrass::Enforce(Cell *c, Animal *a)
 {
     bool ok = true;
+    QPoint p1 = QPoint (70,70);
+    QPoint p2 = QPoint (50,50);
+    QPoint p3 = c->pos() - a->Cells()->pos();
+    if (p1.x() <= abs(p3.x()) || p1.y() <= abs(p3.y()))
+    {
+        qDebug() << "ahh";
+        return false;
+    } else if (p2.x() <= abs(p3.x()) && p2.y() <= abs(p3.y()))
+    {
+        return false;
+    }
     if (c->Empty())
     {
         ok = true;
@@ -33,6 +44,17 @@ bool RuleGrass::Enforce(Cell *c, Animal *a)
 bool RuleRiver::Enforce(Cell *c, Animal *a)
 {
     bool ok = true;
+    QPoint p1 = QPoint (70,70);
+    QPoint p2 = QPoint (50,50);
+    QPoint p3 = c->pos() - a->Cells()->pos();
+    if (p1.x() <= abs(p3.x()) || p1.y() <= abs(p3.y()))
+    {
+        qDebug() << "ahh";
+        return false;
+    } else if (p2.x() <= abs(p3.x()) && p2.y() <= abs(p3.y()))
+    {
+        return false;
+    }
     if (a->Cells()->Type()==GRASS
             && c->Empty()
             && a->Pieces()==MOUSE)
@@ -52,6 +74,17 @@ bool RuleRiver::Enforce(Cell *c, Animal *a)
 bool RuleRedTrap::Enforce(Cell *c, Animal *a)
 {
     bool ok = true;
+    QPoint p1 = QPoint (70,70);
+    QPoint p2 = QPoint (50,50);
+    QPoint p3 = c->pos() - a->Cells()->pos();
+    if (p1.x() <= abs(p3.x()) || p1.y() <= abs(p3.y()))
+    {
+        qDebug() << "ahh";
+        return false;
+    } else if (p2.x() <= abs(p3.x()) && p2.y() <= abs(p3.y()))
+    {
+        return false;
+    }
     if (c->Empty())
     {
         ok = true;
@@ -80,6 +113,17 @@ bool RuleRedTrap::Enforce(Cell *c, Animal *a)
 bool RuleBlueTrap::Enforce(Cell *c, Animal *a)
 {
     bool ok = true;
+    QPoint p1 = QPoint (70,70);
+    QPoint p2 = QPoint (50,50);
+    QPoint p3 = c->pos() - a->Cells()->pos();
+    if (p1.x() <= abs(p3.x()) || p1.y() <= abs(p3.y()))
+    {
+        qDebug() << "ahh";
+        return false;
+    } else if (p2.x() <= abs(p3.x()) && p2.y() <= abs(p3.y()))
+    {
+        return false;
+    }
     if (c->Empty())
     {
         ok = true;
@@ -107,10 +151,32 @@ bool RuleBlueTrap::Enforce(Cell *c, Animal *a)
 
 bool RuleRedBase::Enforce(Cell *c, Animal *a)
 {
+    QPoint p1 = QPoint (70,70);
+    QPoint p2 = QPoint (50,50);
+    QPoint p3 = c->pos() - a->Cells()->pos();
+    if (p1.x() <= abs(p3.x()) || p1.y() <= abs(p3.y()))
+    {
+        qDebug() << "ahh";
+        return false;
+    } else if (p2.x() <= abs(p3.x()) && p2.y() <= abs(p3.y()))
+    {
+        return false;
+    }
     return c->Empty() && a->Colors()==BLUE;
 }
 
 bool RuleBlueBase::Enforce(Cell *c, Animal *a)
 {
+    QPoint p1 = QPoint (70,70);
+    QPoint p2 = QPoint (50,50);
+    QPoint p3 = c->pos() - a->Cells()->pos();
+    if (p1.x() <= abs(p3.x()) || p1.y() <= abs(p3.y()))
+    {
+        qDebug() << "ahh";
+        return false;
+    } else if (p2.x() <= abs(p3.x()) && p2.y() <= abs(p3.y()))
+    {
+        return false;
+    }
     return c->Empty() && a->Colors()==RED;
 }
