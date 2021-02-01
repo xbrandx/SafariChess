@@ -7,6 +7,7 @@
 #include <cmath>
 #include "cell.h"
 #include "animal.h"
+#include "game.h"
 
 class Animal;
 class Cell;
